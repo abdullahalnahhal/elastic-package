@@ -1,0 +1,24 @@
+{
+    "name": "elastic/orm",
+    "description": "make elastic orm base on spatie elastic query builder",
+    "require": {
+        "elasticsearch/elasticsearch":"*",
+        "spatie/elasticsearch-query-builder": "^3.0"
+    },
+    "autoload": {
+        "psr-4": {
+            "ElasticOrm\\": "src/"
+        }
+    },
+    "authors": [
+        {
+            "name": "Abdullah Alnahhal",
+            "email": "abdullah.alnahhal@gmail.com"
+        }
+    ],
+    "config": {
+        "allow-plugins": {
+            "php-http/discovery": true
+        }
+    }
+}
