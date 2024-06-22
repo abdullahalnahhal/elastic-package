@@ -1,6 +1,7 @@
 <?php
 
 use ElasticOrm\Model;
+use ElasticOrm\Builder;
 use Illuminate\Support\Facades\Route;
 /*
 |--------------------------------------------------------------------------
@@ -16,14 +17,23 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', function () {
 
     $model =  new Model();
-    $model->where("any")->where([
+    $model
+    ->where(function(Builder $query){
+        $query->where(function(Builder $query){
+            $query->where("inner2", ">", 777);
+        })->where("any");
+    })
+    ->where("any")
+    ->where([
         'any' => 777,
         'any2' => [1, 2, 5]
     ])->whereNot([
         "any",
         'any' => 777,
         'any2' => [1, 2, 5]
-    ])->where("any", ">", 70)->like("column1", "%ahmed")->notLike("column2", "ali%")->dd();
+    ])->where("any", ">", 70)
+    ->like("column1", "%ahmed")
+    ->notLike("column2", "ali%")->dd();
 
     return view('welcome');
 });
